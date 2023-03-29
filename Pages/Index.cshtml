@@ -2,9 +2,32 @@
 @model IndexModel
 @{
     ViewData["Title"] = "FizzBuzz page";
+    ViewData["Result"] = "";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Cześć</h1>
-    <p hidden>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Cześć @Model.Name</h1>
+    <form method="post">
+        <label asp-for="FizzBuzz.Number"></label>
+        <input asp-for="FizzBuzz.Number" /><br />
+        <button type="submit">Zatwierdź</button>
+        <span asp-validation-for="FizzBuzz.Number" class="text-danger"></span>
+
+        @if (Model.Result != null)
+        {
+            @if (Model.Result == "Fizz" || Model.Result == "Buzz" || Model.Result == "FizzBuzz")
+            {
+                <div class="alert alert-success" style="width:30%;" role="alert" >
+                    @Model.Result
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" style="width:30%;" role="alert">
+                    @Model.Result
+                </div>
+            }
+
+        }
+    </form>
 </div>
